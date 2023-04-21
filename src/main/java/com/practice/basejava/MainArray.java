@@ -45,6 +45,12 @@ public class MainArray {
         case "get":
           System.out.println(ARRAY_STORAGE.get(uuid));
           break;
+        case "update":
+          r = new Resume();
+          r.setUuid(uuid);
+          ARRAY_STORAGE.update(r);
+          printAll();
+          break;
         case "clear":
           ARRAY_STORAGE.clear();
           printAll();
