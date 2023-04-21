@@ -1,33 +1,35 @@
-package com.practice;
+package com.practice.basejava.storage;
+
+import com.practice.basejava.model.Resume;
 
 public class ArrayStorage {
 
   private final Resume[] storage = new Resume[10000];
   private int index = 0;
 
-  void clear() {
+  public void clear() {
     for (int i = 0; i < index; i++) {
       storage[i] = null;
     }
     index = 0;
   }
 
-  void save(Resume r) {
+  public void save(Resume r) {
     storage[index++] = r;
   }
 
-  Resume get(String uuid) {
+  public Resume get(String uuid) {
     for (int i = 0; i < index; i++) {
-      if (uuid.equals(storage[i].uuid)) {
+      if (uuid.equals(storage[i].getUuid())) {
         return storage[i];
       }
     }
     return null;
   }
 
-  void delete(String uuid) {
+  public void delete(String uuid) {
     for (int i = 0; i < index; i++) {
-      if (uuid.equals(storage[i].uuid)) {
+      if (uuid.equals(storage[i].getUuid())) {
         storage[i] = storage[index - 1];
         storage[index - i] = null;
         index--;
@@ -35,7 +37,7 @@ public class ArrayStorage {
     }
   }
 
-  Resume[] getAll() {
+  public Resume[] getAll() {
     Resume[] resume = new Resume[index];
     for (int i = 0; i < index; i++) {
       resume[i] = storage[i];
@@ -43,7 +45,7 @@ public class ArrayStorage {
     return resume;
   }
 
-  int size() {
+  public int size() {
     return index;
   }
 }

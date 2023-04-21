@@ -1,4 +1,7 @@
-package com.practice;
+package com.practice.basejava;
+
+import com.practice.basejava.model.Resume;
+import com.practice.basejava.storage.ArrayStorage;
 
 public class MainTestArrayStorage {
 
