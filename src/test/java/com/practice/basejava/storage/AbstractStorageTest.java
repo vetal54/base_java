@@ -9,7 +9,7 @@ import com.practice.basejava.model.Resume;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-abstract class AbstractArrayStorageTest {
+public abstract class AbstractStorageTest {
 
   private final Storage storage;
 
@@ -30,7 +30,7 @@ abstract class AbstractArrayStorageTest {
     RESUME_4 = new Resume(UUID_4);
   }
 
-  protected AbstractArrayStorageTest(Storage storage) {
+  protected AbstractStorageTest(Storage storage) {
     this.storage = storage;
   }
 
