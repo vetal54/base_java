@@ -6,6 +6,8 @@ import com.practice.basejava.exception.ExistStorageException;
 import com.practice.basejava.exception.NotExistStorageException;
 import com.practice.basejava.exception.StorageException;
 import com.practice.basejava.model.Resume;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -65,12 +67,10 @@ public abstract class AbstractStorageTest {
   }
 
   @Test
-  void getAll() {
-    Resume[] all = storage.getAll();
-    assertEquals(3, all.length);
-    assertEquals(RESUME_1, all[0]);
-    assertEquals(RESUME_2, all[1]);
-    assertEquals(RESUME_3, all[2]);
+  public void getAllSorted() throws Exception {
+    List<Resume> list = storage.getAllSorted();
+    assertEquals(3, list.size());
+    assertEquals(list, Arrays.asList(RESUME_1, RESUME_2, RESUME_3));
   }
 
   @Test
@@ -99,9 +99,9 @@ public abstract class AbstractStorageTest {
 
   @Test
   void get() {
-    assertGet(new Resume(UUID_1));
-    assertGet(new Resume(UUID_2));
-    assertGet(new Resume(UUID_3));
+    assertGet(RESUME_1);
+    assertGet(RESUME_2);
+    assertGet(RESUME_3);
   }
 
   @Test

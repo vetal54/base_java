@@ -3,10 +3,14 @@ package com.practice.basejava.storage;
 import com.practice.basejava.exception.ExistStorageException;
 import com.practice.basejava.exception.NotExistStorageException;
 import com.practice.basejava.model.Resume;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class AbstractStorage implements Storage {
 
   protected abstract Object getSearchKey(String uuid);
+
+  protected abstract List<Resume> doCopyAll();
 
   protected abstract void doUpdate(Resume r, Object searchKey);
 
@@ -50,12 +54,18 @@ public abstract class AbstractStorage implements Storage {
     return searchKey;
   }
 
-
   private Object getNotExistedSearchKey(String uuid) {
     Object searchKey = getSearchKey(uuid);
     if (isExist(searchKey)) {
       throw new ExistStorageException(uuid);
     }
     return searchKey;
+  }
+
+  @Override
+  public List<Resume> getAllSorted() {
+    List<Resume> list = doCopyAll();
+    Collections.sort(list);
+    return list;
   }
 }

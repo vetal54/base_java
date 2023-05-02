@@ -1,7 +1,9 @@
 package com.practice.basejava.storage;
 
 import com.practice.basejava.model.Resume;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MapUuidStorage extends AbstractStorage {
@@ -44,8 +46,8 @@ public class MapUuidStorage extends AbstractStorage {
   }
 
   @Override
-  public Resume[] getAll() {
-    return map.values().toArray(new Resume[size()]);
+  public List<Resume> doCopyAll() {
+    return Collections.emptyList();
   }
 
   @Override
