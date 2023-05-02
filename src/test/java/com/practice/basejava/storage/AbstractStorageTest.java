@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public abstract class AbstractStorageTest {
 
-  private final Storage storage;
+  protected final Storage storage;
 
   private static final String UUID_1 = "uuid1";
   private static final String UUID_2 = "uuid2";
@@ -24,12 +24,11 @@ public abstract class AbstractStorageTest {
   private static final Resume RESUME_4;
 
   static {
-    RESUME_1 = new Resume(UUID_1);
-    RESUME_2 = new Resume(UUID_2);
-    RESUME_3 = new Resume(UUID_3);
-    RESUME_4 = new Resume(UUID_4);
+    RESUME_1 = new Resume(UUID_1, "Name1");
+    RESUME_2 = new Resume(UUID_2, "Name2");
+    RESUME_3 = new Resume(UUID_3, "Name3");
+    RESUME_4 = new Resume(UUID_4, "Name4");
   }
-
   protected AbstractStorageTest(Storage storage) {
     this.storage = storage;
   }
@@ -55,8 +54,9 @@ public abstract class AbstractStorageTest {
 
   @Test
   void update() {
-    storage.update(RESUME_1);
-    assertSame(RESUME_1, storage.get(UUID_1));
+    Resume newResume = new Resume(UUID_1, "New Name");
+    storage.update(newResume);
+    assertSame(newResume, storage.get(UUID_1));
   }
 
   @Test
@@ -83,16 +83,6 @@ public abstract class AbstractStorageTest {
   @Test
   void saveExist() {
     assertThrows(ExistStorageException.class, () -> storage.save(RESUME_1));
-  }
-
-  @Test
-  void saveOverflow() {
-    assertThrows(StorageException.class, () -> {
-      storage.clear();
-      for (int i = 0; i < AbstractArrayStorage.STORAGE_LIMIT + 1; i++) {
-        storage.save(new Resume());
-      }
-    });
   }
 
   @Test
